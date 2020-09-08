@@ -1,5 +1,5 @@
 ---
-title: "ds202_lab2"
+title: "team"
 author: "Matthew Eisner and Cody Nielsen"
 date: "9/8/2020"
 output: html_document
