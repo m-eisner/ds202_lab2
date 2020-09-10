@@ -13,3 +13,34 @@ knitr::opts_chunk$set(echo = TRUE)
 choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
 str(choco)
 ```
+
+1. How are the ratings distributed? Create both a histogram and a boxplot and describe them. Don’t forget to mention outliers, if there are any.
+
+According to the histogram, the ratings follow a distribution that is close in shape to a normal distribution. As shown in the boxplot, half of all ratings also fall between the 3.0 and 3.5 rating mark. The boxplot also reveals some outliers with ratings of 2.0, 1.75, 1.5, 1.0.
+
+```{r}
+hist(choco$Rating, breaks=seq(1,5,.25))
+boxplot(choco$Rating)
+```
+
+2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+
+```{r}
+
+```
+
+3. Do ratings depend on the cacao percentage of a chocolate bar? Create both numerical and graphical summaries, and explain.
+
+It does not appear that cacao percentage has a significant effect on the rating of the chocolate. This is because there is no obvious pattern in the scatterplot below, meaning there is no strong trend between the data sets. In addition, the correlation matrix shows that the correlation coefficient between the two values is only -0.151, which indicates that there is not a strong correlation between the variables as it is close to zero.
+
+```{r}
+plot(choco$Rating ~ choco$Cocoa_Percent)
+x <- choco[,c('Rating', 'Cocoa_Percent')]
+cor(x)
+```
+
+4. How do different characteristics of the chocolate compare? To elaborate, which characteristics tend to be more favorable and which ones are not? Create both numerical and graphical summaries, and explain.
+
+```{r}
+
+```

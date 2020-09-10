@@ -13,3 +13,40 @@ knitr::opts_chunk$set(echo = TRUE)
 choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
 str(choco)
 ```
+
+## Searching for the Best Chocolates
+
+We will be exploring what aspects of the chocolates may affect taste. Before setting off to the exploration, answer the following questions.
+
+1. How are the ratings distributed? Create both a histogram and a boxplot and describe them. Don’t forget to mention outliers, if there are any.
+
+```{r}
+hist(choco$Rating, breaks=seq(1,5,.25))
+boxplot(choco$Rating)
+```
+
+2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+
+```{r}
+counts <- table(choco$Date)
+barplot(counts, las=2, beside=TRUE, ylim=range(pretty(c(0, 300))))
+```
+
+3. Do ratings depend on the cacao percentage of a chocolate bar? Create both numerical and graphical summaries, and explain.
+
+```{r}
+plot(choco$Rating ~ choco$Cocoa_Percent)
+x <- choco[,c('Rating', 'Cocoa_Percent')]
+cor(x)
+```
+
+4. How do different characteristics of the chocolate compare? To elaborate, which characteristics tend to be more favorable and which ones are not? Create both numerical and graphical summaries, and explain.
+
+```{r}
+
+```
+
+5. Brainstorm two analyses you would like to perform with your teammate. Describe in plain language what comparisons are you making. Create suitable numerical and graphical summaries for your analyses. Describe the results.
+
+how different characteristics correlate to where the chocolate is from
+
