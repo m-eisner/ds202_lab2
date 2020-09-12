@@ -16,7 +16,7 @@ str(choco)
 
 1. How are the ratings distributed? Create both a histogram and a boxplot and describe them. Don’t forget to mention outliers, if there are any.
 
-According to the histogram, the ratings follow a distribution that is close in shape to a normal distribution. As shown in the boxplot, half of all ratings also fall between the 3.0 and 3.5 rating mark. The boxplot also reveals some outliers with ratings of 2.0, 1.75, 1.5, 1.0.
+According to the histogram, the ratings follow a distribution that is close in shape to a normal distribution. As shown in the boxplot, half of all ratings also fall between the 3.0 and 3.5 rating mark. The boxplot also reveals some outliers with ratings of 2.0, 1.75, 1.5, and 1.0.
 
 ```{r}
 hist(choco$Rating, breaks=seq(1,5,.25))
@@ -43,4 +43,46 @@ cor(x)
 
 ```{r}
 
+```
+
+5. Brainstorm two analyses you would like to perform with your teammate. Describe in plain language what comparisons are you making. Create suitable numerical and graphical summaries for your analyses. Describe the results.
+
+My (Matt Eisner) analysis will compare the percentage of cocoa used in chocolate between different countries. I have chosen 4 of the countries with the most amount of reviews: the United States, France, Canada, and the United Kingdom. I chose to utilizes histograms to visualize the data graphically. From the histograms, we see that the highest frequency of cocoa percent of the US and Canada was within the 65 to 70 percent range. For France and the UK, the highest frequency of cocoa percent fell within the 70 to 75 percent range. The mean, median and standard deviation of cocoa percent was also calculated for these countries and is shown in the dataframe below. From this summary, it was found that on average, the US uses the least amount of cocoa with a value of 71.6%. The UK has the highest mean cocoa percentage at 73.8%. In addition, the US data varied the least with a standard deviation of 4.9 and the UK data varied the most with a standard deviation of 7.4. The mean and median values for each country were also plotted on their respective histograms.
+
+```{r}
+library(ggplot2)
+
+par(mfrow=c(2,2))
+
+UK <- choco$Cocoa_Percent[choco$Location == 'U.K.']
+CA <- choco$Cocoa_Percent[choco$Location == 'Canada']
+FR <- choco$Cocoa_Percent[choco$Location == 'France']
+USA <- choco$Cocoa_Percent[choco$Location == 'U.S.A.']
+
+hist(UK, xlab='Cocoa Percent', main='United Kingdom', col='peachpuff', ylim=c(0,60), xlim=c(50,100))
+abline(v = mean(UK), col = "royalblue", lwd = 2)
+abline(v = median(UK), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(CA, xlab='Cocoa Percent', main='Canada', col='peachpuff', xlim=c(50,100))
+abline(v = mean(CA), col = "royalblue", lwd = 2)
+abline(v = median(CA), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(FR, xlab='Cocoa Percent', main='France', col='peachpuff', xlim=c(50,100))
+abline(v = mean(FR), col = "royalblue", lwd = 2)
+abline(v = median(FR), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(USA, xlab='Cocoa Percent', main='United States', col='peachpuff', xlim=c(50,100), ylim=c(0,500))
+abline(v = mean(USA), col = "royalblue", lwd = 2)
+abline(v = median(USA), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+country <- c('United Kingdom', 'Canada', 'France', 'United States')
+mean <- c(mean(UK), mean(CA), mean(FR), mean(USA))
+median <- c(median(UK), median(CA), median(FR), median(USA))
+standard_deviation <- c(sd(UK), sd(CA), sd(FR), sd(USA))
+country_data <- data.frame(country, mean, median, standard_deviation)
+head(country_data)
 ```

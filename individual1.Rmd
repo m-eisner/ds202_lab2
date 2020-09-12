@@ -50,3 +50,46 @@ cor(x)
 
 how different characteristics correlate to where the chocolate is from
 
+```{r}
+tb <- table(choco$Location)
+#tb[order(-as.numeric(names(tb)))]
+tb
+```
+
+```{r}
+library(ggplot2)
+
+par(mfrow=c(2,2))
+
+UK <- choco$Cocoa_Percent[choco$Location == 'U.K.']
+CA <- choco$Cocoa_Percent[choco$Location == 'Canada']
+FR <- choco$Cocoa_Percent[choco$Location == 'France']
+USA <- choco$Cocoa_Percent[choco$Location == 'U.S.A.']
+
+hist(UK, xlab='Cocoa Percent', main='United Kingdom', col='peachpuff', ylim=c(0,60), xlim=c(50,100))
+abline(v = mean(UK), col = "royalblue", lwd = 2)
+abline(v = median(UK), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(CA, xlab='Cocoa Percent', main='Canada', col='peachpuff', xlim=c(50,100))
+abline(v = mean(CA), col = "royalblue", lwd = 2)
+abline(v = median(CA), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(FR, xlab='Cocoa Percent', main='France', col='peachpuff', xlim=c(50,100))
+abline(v = mean(FR), col = "royalblue", lwd = 2)
+abline(v = median(FR), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+hist(USA, xlab='Cocoa Percent', main='United States', col='peachpuff', xlim=c(50,100), ylim=c(0,500))
+abline(v = mean(USA), col = "royalblue", lwd = 2)
+abline(v = median(USA), col = "red", lwd = 2)
+legend(x = "topright", c("Mean", "Median"), col = c("royalblue", "red"), lwd = c(2, 2))
+
+country <- c('United Kingdom', 'Canada', 'France', 'United States')
+mean <- c(mean(UK), mean(CA), mean(FR), mean(USA))
+median <- c(median(UK), median(CA), median(FR), median(USA))
+standard_deviation <- c(sd(UK), sd(CA), sd(FR), sd(USA))
+country_data <- data.frame(country, mean, median, standard_deviation)
+head(country_data)
+```
