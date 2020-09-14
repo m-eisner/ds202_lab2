@@ -1,6 +1,6 @@
 ---
 title: "individual2"
-author: "Cody Nielsen"
+author: "Cody Nielsen and Matthew Eisner"
 date: "9/8/2020"
 output: html_document
 ---
@@ -9,22 +9,53 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv")
+str(choco)
 ```
 
-## Including Plots
+We will be exploring what aspects of the chocolates may affect taste. Before setting off to the exploration, answer the following questions.
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+1. How are the ratings distributed? Create both a histogram and a boxplot and describe them. Don’t forget to mention outliers, if there are any.
+```{r}
+hist(choco$Rating,main="Chocolate", breaks=10)
+boxplot(choco$Rating)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+```{r}
+year <- table(choco$Date)
+barplot(year, las=2, main="Ratings per Year",xlab="Year",ylab="Rating")
+```
+
+3. Do ratings depend on the cacao percentage of a chocolate bar? Create both numerical and graphical summaries, and explain.
+```{r}
+plot(choco$Rating ~ choco$Cocoa_Percent)
+x <- choco[,c('Rating', 'Cocoa_Percent')]
+cor(x)
+```
+There does not seem to be a correlation between the cocoa percent and the rating
+
+4. 
+```{r}
+char1 <- table(choco$Characteristics1,choco$Rating)
+barplot(char1)
+head(char1, 15)
+char2 <- table(choco$Characteristics2,choco$Rating)
+barplot(char2)
+head(char2, 15)
+char3 <- table(choco$Characteristics3,choco$Rating)
+barplot(char3)
+head(char3, 15)
+char4 <- table(choco$Characteristics4,choco$Rating)
+barplot(char4)
+head(char4, 15)
+```
+It seems that the first characteristic has more of an effect on the rating than the following characteristics.
+
+5. 
+Rating based on the origin of the bean
+```{r}
+cocoaLoc <- table(choco$Bean_Origin,choco$Rating)
+cocoaLoc
+```

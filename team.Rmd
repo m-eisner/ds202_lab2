@@ -26,7 +26,8 @@ boxplot(choco$Rating)
 2. How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
 
 ```{r}
-
+year <- table(choco$Date)
+barplot(year, las=2, main="Ratings per Year",xlab="Year",ylab="Rating")
 ```
 
 3. Do ratings depend on the cacao percentage of a chocolate bar? Create both numerical and graphical summaries, and explain.
@@ -42,8 +43,20 @@ cor(x)
 4. How do different characteristics of the chocolate compare? To elaborate, which characteristics tend to be more favorable and which ones are not? Create both numerical and graphical summaries, and explain.
 
 ```{r}
-
+char1 <- table(choco$Characteristics1,choco$Rating)
+barplot(char1)
+head(char1, 15)
+char2 <- table(choco$Characteristics2,choco$Rating)
+barplot(char2)
+head(char2, 15)
+char3 <- table(choco$Characteristics3,choco$Rating)
+barplot(char3)
+head(char3, 15)
+char4 <- table(choco$Characteristics4,choco$Rating)
+barplot(char4)
+head(char4, 15)
 ```
+It seems that the first characteristic has more of an effect on the rating than the following characteristics.
 
 5. Brainstorm two analyses you would like to perform with your teammate. Describe in plain language what comparisons are you making. Create suitable numerical and graphical summaries for your analyses. Describe the results.
 
