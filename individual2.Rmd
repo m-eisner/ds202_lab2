@@ -59,3 +59,31 @@ Rating based on the origin of the bean
 cocoaLoc <- table(choco$Bean_Origin,choco$Rating)
 cocoaLoc
 ```
+
+```{r}
+library(ggplot2)
+
+par(mfrow=c(2,2))
+
+DR <- choco$Rating[choco$Bean_Origin == 'Dominican Republic']
+Ecu <- choco$Rating[choco$Bean_Origin == 'Ecuador']
+MAD <- choco$Rating[choco$Bean_Origin == 'Madagascar']
+Per <- choco$Rating[choco$Bean_Origin == 'Peru']
+Ven <- choco$Rating[choco$Bean_Origin == 'Venezuela']
+
+hist(DR, main="Dominican Republic", xlab="Rating", xlim=c(1,4), ylim=c(0,50))
+abline(v=mean(DR), col="red", lwd=2)
+hist(Ecu, main="Ecuador", xlab="Rating", xlim=c(1,4))
+abline(v=mean(Ecu), col="red", lwd=2)
+hist(MAD, main="Madagascar", xlab="Rating", xlim=c(1,4), ylim=c(0,50))
+abline(v=mean(MAD), col="red", lwd=2)
+hist(Per, main="Peru", xlab="Rating", xlim=c(1,4), ylim=c(0,50))
+abline(v=mean(Per), col="red", lwd=2)
+hist(Ven, main="Venezuela", xlab="Rating", xlim=c(1,4))
+abline(v=mean(Ven), col="red", lwd=2)
+country <- c('Dominican Republic', 'Ecuador', 'Madagascar', 'Peru', 'Venezuela')
+mean <- c(mean(DR), mean(Ecu), mean(MAD), mean(Per), mean(Ven))
+stdn <- c(sd(DR), sd(Ecu), sd(MAD), sd(Per), sd(Ven))
+data <- data.frame(country, mean, stdn)
+head(data)
+```
